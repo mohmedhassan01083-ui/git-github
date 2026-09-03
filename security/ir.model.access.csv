@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_estate_property,estate.property,model_estate_property,base.group_user,1,1,1,1
+access_estate_booking,estate.booking,model_estate_booking,base.group_user,1,1,1,1
+access_estate_sale_application,estate.sale.application,model_estate_sale_application,base.group_user,1,1,1,1
+access_estate_rental_application,estate.rental.application,model_estate_rental_application,base.group_user,1,1,1,1
+access_estate_installment,estate.installment,model_estate_installment,base.group_user,1,1,1,1
+
+access_estate_construction_project,estate.construction.project,model_estate_construction_project,base.group_user,1,1,1,1
+access_estate_construction_material,estate.construction.material,model_estate_construction_material,base.group_user,1,1,1,1
+access_estate_construction_labor,estate.construction.labor,model_estate_construction_labor,base.group_user,1,1,1,1
+access_estate_construction_equipment,estate.construction.equipment,model_estate_construction_equipment,base.group_user,1,1,1,1
+access_estate_construction_expense,estate.construction.expense,model_estate_construction_expense,base.group_user,1,1,1,1

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- PROPERTY FORM VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="property_form_view" model="ir.ui.view">
+        <field name="name">estate.property.form</field>
+        <field name="model">estate.property</field>
+
+        <field name="arch" type="xml">
+            <form string="Property">
+
+                <!-- ========================= -->
+                <!-- HEADER -->
+                <!-- ========================= -->
+
+                <header>
+
+                    <!-- Sale / Rental -->
+                    <field name="unit_type"
+                           widget="radio"
+                           options="{'horizontal': true}"
+                           class="oe_button_box"/>
+
+                    <!-- Booking -->
+                    <button name="action_open_booking"
+                            string="Booking"
+                            type="object"
+                            class="btn-success"/>
+
+                    <!-- Rental -->
+                    <button name="action_open_rental"
+                            string="Rental"
+                            type="object"
+                            class="btn-success"/>
+
+                    <!-- Create Product -->
+                    <button name="action_create_product"
+                            string="Create Product"
+                            type="object"
+                            class="btn-primary"
+                            invisible="product_id"/>
+
+                    <!-- Open Product -->
+                    <button name="action_open_product"
+                            string="Open Product"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="not product_id"/>
+
+                    <!-- Print -->
+                    <button name="action_print_report"
+                            string="Print"
+                            type="object"
+                            class="btn-secondary"/>
+
+                </header>
+
+                <!-- ========================= -->
+                <!-- MAIN SHEET -->
+                <!-- ========================= -->
+
+                <sheet>
+
+                    <!-- ========================= -->
+                    <!-- COMPANY LOGO -->
+                    <!-- ========================= -->
+
+                    <div class="text-center" style="margin-bottom: 20px;">
+                        <img src="/test_addon/static/description/logo.png"
+                             style="max-height: 100px; max-width: 250px;"/>
+                    </div>
+
+                    <!-- ========================= -->
+                    <!-- PROPERTY INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Property Information">
+
+                        <group>
+
+                            <field name="name"/>
+
+                            <field name="price"/>
+
+                            <field name="area"/>
+
+                            <field name="unit_type"
+                                   widget="radio"
+                                   options="{'horizontal': true}"/>
+
+                            <field name="product_id"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="bedrooms"/>
+
+                            <field name="bathrooms"/>
+
+                            <field name="garden"/>
+
+                            <field name="garden_area"/>
+
+                        </group>
+
+                    </group>
+
+                    <!-- ========================= -->
+                    <!-- DESCRIPTION -->
+                    <!-- ========================= -->
+
+                    <group string="Description">
+
+                        <field name="description"/>
+
+                    </group>
+
+                    <!-- ========================= -->
+                    <!-- RENTAL INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Rental Information"
+                           invisible="unit_type != 'rent'">
+
+                        <field name="rent_period"/>
+
+                    </group>
+
+                    <!-- ========================= -->
+                    <!-- CUSTOMER INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Customer Information">
+
+                        <field name="customer_id"/>
+
+                    </group>
+
+                    <!-- ========================= -->
+                    <!-- INSTALLMENT INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Installment Information">
+
+                        <group>
+
+                            <field name="down_payment"/>
+
+                            <field name="interest_rate"/>
+
+                            <field name="years"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="remaining_amount"
+                                   readonly="1"/>
+
+                            <field name="total_after_interest"
+                                   readonly="1"/>
+
+                            <field name="monthly_installment"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- PROPERTY LIST VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="property_tree_view" model="ir.ui.view">
+
+        <field name="name">estate.property.list</field>
+        <field name="model">estate.property</field>
+
+        <field name="arch" type="xml">
+
+            <list string="Properties">
+
+                <field name="name"/>
+
+                <field name="product_id"/>
+
+                <field name="price"/>
+
+                <field name="area"/>
+
+                <field name="unit_type"/>
+
+                <field name="bedrooms"/>
+
+                <field name="state"/>
+
+            </list>
+
+        </field>
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- PROPERTY ACTION -->
+    <!-- ===================================================== -->
+
+    <record id="property_action" model="ir.actions.act_window">
+
+        <field name="name">Properties</field>
+
+        <field name="res_model">estate.property</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- MENUS -->
+    <!-- ===================================================== -->
+
+    <menuitem
+        id="estate_menu"
+        name="Real Estate"
+        sequence="10"/>
+
+    <menuitem
+        id="property_menu"
+        name="Properties"
+        parent="estate_menu"
+        action="property_action"
+        sequence="10"/>
+
+</odoo>

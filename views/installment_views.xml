@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- INSTALLMENT FORM VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="estate_installment_form_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.installment.form</field>
+        <field name="model">estate.installment</field>
+
+        <field name="arch" type="xml">
+
+            <form string="Installment">
+
+                <header>
+
+                    <button name="action_register_payment"
+                            string="Register Payment"
+                            type="object"
+                            class="btn-primary"
+                            invisible="status == 'paid'"/>
+
+                    <field name="status"
+                           widget="statusbar"
+                           statusbar_visible="pending,partial,paid,late"/>
+
+                </header>
+
+                <sheet>
+
+                    <group string="Installment Information">
+
+                        <group>
+
+                            <field name="name"
+                                   readonly="1"/>
+
+                            <field name="installment_number"
+                                   readonly="1"/>
+
+                            <field name="sale_application_id"
+                                   readonly="1"/>
+
+                            <field name="customer_id"
+                                   readonly="1"/>
+
+                            <field name="property_id"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="amount"/>
+
+                            <field name="paid_amount"/>
+
+                            <field name="remaining_amount"
+                                   readonly="1"/>
+
+                            <field name="due_date"/>
+
+                            <field name="payment_date"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+                    <group string="Invoice Information">
+
+                        <field name="invoice_id"/>
+
+                        <field name="invoice_name"
+                               readonly="1"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- INSTALLMENT LIST VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="estate_installment_tree_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.installment.list</field>
+        <field name="model">estate.installment</field>
+
+        <field name="arch" type="xml">
+
+            <list string="Installments">
+
+                <field name="installment_number"/>
+
+                <field name="name"/>
+
+                <field name="customer_id"/>
+
+                <field name="property_id"/>
+
+                <field name="amount"/>
+
+                <field name="paid_amount"/>
+
+                <field name="remaining_amount"/>
+
+                <field name="due_date"/>
+
+                <field name="payment_date"/>
+
+                <field name="status"/>
+
+                <field name="invoice_name"/>
+
+                <button name="action_register_payment"
+                        string="Register Payment"
+                        type="object"
+                        class="btn-primary"
+                        invisible="status == 'paid'"/>
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- INSTALLMENT ACTION -->
+    <!-- ===================================================== -->
+
+    <record id="estate_installment_action"
+            model="ir.actions.act_window">
+
+        <field name="name">Installments</field>
+
+        <field name="res_model">estate.installment</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- INSTALLMENT MENU -->
+    <!-- ===================================================== -->
+
+    <menuitem id="estate_installment_menu"
+              name="Installments"
+              parent="estate_menu"
+              action="estate_installment_action"
+              sequence="30"/>
+
+</odoo>

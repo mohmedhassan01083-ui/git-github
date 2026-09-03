@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- EXPENSE FORM VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="construction_expense_form_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.construction.expense.form</field>
+        <field name="model">estate.construction.expense</field>
+
+        <field name="arch" type="xml">
+
+            <form string="Construction Expense">
+
+                <sheet>
+
+                    <div class="oe_title">
+
+                        <label for="name"
+                               class="oe_edit_only"/>
+
+                        <h1>
+                            <field name="name"
+                                   placeholder="Expense Name"/>
+                        </h1>
+
+                    </div>
+
+
+                    <!-- ========================= -->
+                    <!-- EXPENSE INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Expense Information">
+
+                        <group>
+
+                            <field name="name"/>
+
+                            <field name="category"/>
+
+                            <field name="project_id"/>
+
+                            <field name="property_id"/>
+
+                            <field name="building_name"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="partner_id"/>
+
+                            <field name="invoice_number"/>
+
+                            <field name="date"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- DESCRIPTION -->
+                    <!-- ========================= -->
+
+                    <group string="Description">
+
+                        <field name="description"/>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- PAYMENT -->
+                    <!-- ========================= -->
+
+                    <group string="Payment Information">
+
+                        <group>
+
+                            <field name="amount"/>
+
+                            <field name="paid_amount"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="remaining_amount"
+                                   readonly="1"/>
+
+                            <field name="payment_status"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- NOTES -->
+                    <!-- ========================= -->
+
+                    <group string="Notes">
+
+                        <field name="notes"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- EXPENSE LIST VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="construction_expense_tree_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.construction.expense.list</field>
+
+        <field name="model">estate.construction.expense</field>
+
+        <field name="arch" type="xml">
+
+            <list string="Construction Expenses">
+
+                <field name="date"/>
+
+                <field name="name"/>
+
+                <field name="category"/>
+
+                <field name="project_id"/>
+
+                <field name="building_name"/>
+
+                <field name="property_id"/>
+
+                <field name="partner_id"/>
+
+                <field name="amount"/>
+
+                <field name="paid_amount"/>
+
+                <field name="remaining_amount"/>
+
+                <field name="payment_status"/>
+
+                <field name="invoice_number"/>
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- EXPENSE ACTION -->
+    <!-- ===================================================== -->
+
+    <record id="construction_expense_action"
+            model="ir.actions.act_window">
+
+        <field name="name">Construction Expenses</field>
+
+        <field name="res_model">estate.construction.expense</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- EXPENSE MENU -->
+    <!-- ===================================================== -->
+
+    <menuitem
+        id="construction_expense_menu"
+        name="Other Expenses"
+        parent="construction_menu"
+        action="construction_expense_action"
+        sequence="50"/>
+
+</odoo>

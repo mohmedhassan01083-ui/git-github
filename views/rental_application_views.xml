@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- RENTAL APPLICATION FORM -->
+    <!-- ===================================================== -->
+
+    <record id="rental_application_form_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.rental.application.form</field>
+        <field name="model">estate.rental.application</field>
+
+        <field name="arch" type="xml">
+
+            <form string="Rental Application">
+
+                <!-- ========================= -->
+                <!-- HEADER -->
+                <!-- ========================= -->
+
+                <header>
+
+                    <button name="action_approve"
+                            string="Approve"
+                            type="object"
+                            class="btn-success"
+                            invisible="status != 'pending'"/>
+
+                    <button name="action_reject"
+                            string="Reject"
+                            type="object"
+                            class="btn-danger"
+                            invisible="status != 'pending'"/>
+
+                    <button name="action_send_whatsapp"
+                            string="Send WhatsApp"
+                            type="object"
+                            class="btn-primary"/>
+
+                    <field name="status"
+                           widget="statusbar"
+                           statusbar_visible="pending,approved,rejected"/>
+
+                </header>
+
+                <sheet>
+
+                    <!-- ========================= -->
+                    <!-- CUSTOMER INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Customer Information">
+
+                        <group>
+
+                            <field name="customer_id"/>
+
+                            <field name="customer_name"
+                                   readonly="1"/>
+
+                            <field name="phone"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="customer_email"
+                                   readonly="1"/>
+
+                            <field name="address"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- PROPERTY INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Property Information">
+
+                        <group>
+
+                            <field name="property_id"/>
+
+                            <field name="property_type"
+                                   readonly="1"/>
+
+                            <field name="product_id"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="area"/>
+
+                            <field name="monthly_rent"
+                                   readonly="1"/>
+
+                            <field name="budget"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- RENTAL INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Rental Information">
+
+                        <group>
+
+                            <field name="rent_duration"/>
+
+                            <field name="rent_start_date"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="rent_end_date"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- ADDITIONAL INFORMATION -->
+                    <!-- ========================= -->
+
+                    <notebook>
+
+                        <!-- ========================= -->
+                        <!-- NOTES -->
+                        <!-- ========================= -->
+
+                        <page string="Notes">
+
+                            <group>
+
+                                <field name="notes"
+                                       placeholder="Enter notes..."/>
+
+                            </group>
+
+                        </page>
+
+
+                        <!-- ========================= -->
+                        <!-- REJECTION -->
+                        <!-- ========================= -->
+
+                        <page string="Rejection">
+
+                            <group>
+
+                                <field name="reject_reason"
+                                       placeholder="Enter reject reason..."/>
+
+                            </group>
+
+                        </page>
+
+
+                        <!-- ========================= -->
+                        <!-- APPROVAL INFORMATION -->
+                        <!-- ========================= -->
+
+                        <page string="Approval Information">
+
+                            <group>
+
+                                <group>
+
+                                    <field name="approved_by"
+                                           readonly="1"/>
+
+                                    <field name="approved_date"
+                                           readonly="1"/>
+
+                                </group>
+
+                                <group>
+
+                                    <field name="whatsapp_sent"
+                                           readonly="1"/>
+
+                                </group>
+
+                            </group>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- RENTAL APPLICATION LIST -->
+    <!-- ===================================================== -->
+
+    <record id="rental_application_tree_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.rental.application.list</field>
+
+        <field name="model">estate.rental.application</field>
+
+        <field name="arch" type="xml">
+
+            <list string="Rental Applications">
+
+                <field name="customer_name"/>
+
+                <field name="phone"/>
+
+                <field name="property_id"/>
+
+                <field name="area"/>
+
+                <field name="monthly_rent"/>
+
+                <field name="budget"/>
+
+                <field name="rent_duration"/>
+
+                <field name="rent_start_date"/>
+
+                <field name="rent_end_date"/>
+
+                <field name="status"/>
+
+                <field name="approved_by"/>
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- RENTAL APPLICATION ACTION -->
+    <!-- ===================================================== -->
+
+    <record id="rental_application_action"
+            model="ir.actions.act_window">
+
+        <field name="name">Rental Applications</field>
+
+        <field name="res_model">estate.rental.application</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- RENTAL APPLICATION MENU -->
+    <!-- ===================================================== -->
+
+    <menuitem id="rental_application_menu"
+              name="Rental Applications"
+              parent="estate_menu"
+              sequence="30"/>
+
+    <menuitem id="rental_application_submenu"
+              name="Applications"
+              parent="rental_application_menu"
+              action="rental_application_action"
+              sequence="10"/>
+
+</odoo>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="construction_project_erp_form_view" model="ir.ui.view">
+        <field name="name">estate.construction.project.erp.form</field>
+        <field name="model">estate.construction.project</field>
+        <field name="inherit_id" ref="test_addon.construction_project_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_open_purchases" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                        <field name="purchase_count" widget="statinfo" string="Purchases"/>
+                    </button>
+                    <button name="action_open_transfers" type="object" class="oe_stat_button" icon="fa-exchange">
+                        <field name="transfer_count" widget="statinfo" string="Transfers"/>
+                    </button>
+                    <button name="action_open_sales" type="object" class="oe_stat_button" icon="fa-usd">
+                        <field name="sale_count" widget="statinfo" string="Sales"/>
+                    </button>
+                    <button name="action_open_invoices" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                        <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="ERP Integration">
+                    <group>
+                        <group string="Odoo Links">
+                            <field name="odoo_project_id" readonly="1"/>
+                            <field name="analytic_account_id" readonly="1"/>
+                            <field name="stock_location_id" readonly="1"/>
+                        </group>
+                        <group string="Financial Summary">
+                            <field name="total_project_cost" readonly="1"/>
+                            <field name="actual_sales_value"/>
+                            <field name="actual_profit" readonly="1"/>
+                            <field name="actual_profit_percentage" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Quick Access">
+                        <button name="action_open_odoo_project" type="object" string="Open Odoo Project" class="btn-primary"/>
+                        <button name="action_open_stock_location" type="object" string="Open Project Stock" class="btn-secondary"/>
+                    </group>
+                    <separator string="Purchases"/>
+                    <field name="purchase_order_ids" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="date_order"/>
+                            <field name="amount_total"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                    <separator string="Stock Transfers"/>
+                    <field name="stock_picking_ids" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="scheduled_date"/>
+                            <field name="location_id"/>
+                            <field name="location_dest_id"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="construction_material_erp_form_view" model="ir.ui.view">
+        <field name="name">estate.construction.material.erp.form</field>
+        <field name="model">estate.construction.material</field>
+        <field name="inherit_id" ref="test_addon.construction_material_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button name="action_create_purchase" type="object" string="Create Purchase" class="btn-primary"/>
+                    <button name="action_create_stock_transfer" type="object" string="Issue to Project" class="btn-secondary"/>
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="inventory_cost" readonly="1"/>
+                <field name="purchase_order_id" readonly="1"/>
+                <field name="stock_picking_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_application_erp_form_view" model="ir.ui.view">
+        <field name="name">estate.sale.application.erp.form</field>
+        <field name="model">estate.sale.application</field>
+        <field name="inherit_id" ref="test_addon.sale_application_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_create_crm_opportunity" type="object" string="Create CRM Opportunity" class="btn-secondary"/>
+            </xpath>
+            <xpath expr="//field[@name='sale_order_id']" position="after">
+                <field name="crm_lead_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_erp_form_view" model="ir.ui.view">
+        <field name="name">purchase.order.construction.project.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="construction_project_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_erp_form_view" model="ir.ui.view">
+        <field name="name">sale.order.construction.project.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='client_order_ref']" position="after">
+                <field name="construction_project_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_move_erp_form_view" model="ir.ui.view">
+        <field name="name">account.move.construction.project.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="construction_project_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

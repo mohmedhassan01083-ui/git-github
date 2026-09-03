@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- BOOKING FORM VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="booking_form_view" model="ir.ui.view">
+
+        <field name="name">estate.booking.form</field>
+        <field name="model">estate.booking</field>
+
+        <field name="arch" type="xml">
+
+            <form string="Booking">
+
+                <!-- ========================= -->
+                <!-- HEADER -->
+                <!-- ========================= -->
+
+                <header>
+
+                    <button name="action_submit"
+                            string="Submit"
+                            type="object"
+                            class="btn-secondary"/>
+
+                    <button name="action_approve"
+                            string="Approve"
+                            type="object"
+                            class="btn-success"
+                            invisible="status != 'pending'"/>
+
+                    <button name="action_reject"
+                            string="Reject"
+                            type="object"
+                            class="btn-danger"
+                            invisible="status != 'pending'"/>
+
+                    <button name="action_send_whatsapp"
+                            string="Send WhatsApp"
+                            type="object"
+                            class="btn-primary"/>
+
+                    <field name="status"
+                           widget="statusbar"
+                           statusbar_visible="pending,approved,rejected"/>
+
+                </header>
+
+
+                <!-- ========================= -->
+                <!-- MAIN SHEET -->
+                <!-- ========================= -->
+
+                <sheet>
+
+                    <!-- ========================= -->
+                    <!-- CUSTOMER INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Customer Information">
+
+                        <group>
+
+                            <field name="customer_id"/>
+
+                            <field name="customer_name"
+                                   readonly="1"/>
+
+                            <field name="phone"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="customer_email"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- PROPERTY INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Property Information">
+
+                        <group>
+
+                            <field name="property_id"/>
+
+                            <field name="property_type"
+                                   readonly="1"/>
+
+                            <field name="booking_type"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- RENTAL INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Rental Information"
+                           invisible="booking_type != 'rent'">
+
+                        <group>
+
+                            <field name="rent_amount"/>
+
+                            <field name="rent_start_date"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="rent_end_date"/>
+
+                            <field name="rent_duration"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- NOTES -->
+                    <!-- ========================= -->
+
+                    <group string="Notes">
+
+                        <field name="notes"/>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- REJECTION INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Rejection Information"
+                           invisible="status != 'rejected'">
+
+                        <field name="reject_reason_type"/>
+
+                        <field name="reject_reason"
+                               invisible="reject_reason_type != 'other'"/>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- APPROVAL INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Approval Information">
+
+                        <group>
+
+                            <field name="approved_by"
+                                   readonly="1"/>
+
+                            <field name="approved_date"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="whatsapp_sent"
+                                   readonly="1"/>
+
+                            <field name="email_sent"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- BOOKING LIST VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="booking_tree_view" model="ir.ui.view">
+
+        <field name="name">estate.booking.list</field>
+        <field name="model">estate.booking</field>
+
+        <field name="arch" type="xml">
+
+            <list string="Bookings">
+
+                <field name="customer_name"/>
+
+                <field name="phone"/>
+
+                <field name="property_id"/>
+
+                <field name="property_type"/>
+
+                <field name="booking_type"/>
+
+                <field name="status"/>
+
+                <field name="approved_by"/>
+
+                <field name="approved_date"/>
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- BOOKING ACTION -->
+    <!-- ===================================================== -->
+
+    <record id="booking_action" model="ir.actions.act_window">
+
+        <field name="name">Bookings</field>
+
+        <field name="res_model">estate.booking</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- BOOKING MENU -->
+    <!-- ===================================================== -->
+
+    <menuitem
+        id="booking_menu"
+        name="Bookings"
+        parent="estate_menu"
+        action="booking_action"
+        sequence="20"/>
+
+</odoo>

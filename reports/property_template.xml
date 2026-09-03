@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <template id="property_template">
+
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs" t-as="o">
+
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <!-- ========================= -->
+                        <!-- Company Header -->
+                        <!-- ========================= -->
+
+                        <div style="
+                            text-align:center;
+                            border-bottom:3px solid #222;
+                            padding-bottom:15px;
+                            margin-bottom:25px;
+                        ">
+
+                            <h1 style="
+                                margin:0;
+                                font-size:32px;
+                                font-weight:bold;
+                                letter-spacing:2px;
+                            ">
+                                ULTIMATE CODE
+                            </h1>
+
+                            <div style="
+                                font-size:16px;
+                                font-style:italic;
+                                margin-top:5px;
+                            ">
+                                Out of the Box
+                            </div>
+
+                        </div>
+
+
+                        <!-- ========================= -->
+                        <!-- Report Title -->
+                        <!-- ========================= -->
+
+                        <div style="
+                            text-align:center;
+                            margin-bottom:25px;
+                        ">
+
+                            <h2 style="
+                                font-size:25px;
+                                font-weight:bold;
+                                margin:0;
+                            ">
+                                PROPERTY REPORT
+                            </h2>
+
+                            <p style="
+                                margin-top:5px;
+                                font-size:13px;
+                            ">
+                                Real Estate Unit Information
+                            </p>
+
+                        </div>
+
+
+                        <!-- ========================= -->
+                        <!-- Property Information -->
+                        <!-- ========================= -->
+
+                        <h3 style="
+                            background:#222;
+                            color:white;
+                            padding:10px;
+                            margin-bottom:0;
+                        ">
+                            Property Information
+                        </h3>
+
+                        <table class="table table-bordered"
+                               style="margin-bottom:25px;">
+
+                            <tbody>
+
+                                <tr>
+                                    <th style="width:30%;">
+                                        Property Name
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Property Price
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.price"/>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Area
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.area"/>
+                                        m²
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Unit Type
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.unit_type"/>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.state"/>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ========================= -->
+                        <!-- Property Specifications -->
+                        <!-- ========================= -->
+
+                        <h3 style="
+                            background:#222;
+                            color:white;
+                            padding:10px;
+                            margin-bottom:0;
+                        ">
+                            Property Specifications
+                        </h3>
+
+                        <table class="table table-bordered"
+                               style="margin-bottom:25px;">
+
+                            <tbody>
+
+                                <tr>
+
+                                    <th>
+                                        Bedrooms
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.bedrooms"/>
+                                    </td>
+
+                                    <th>
+                                        Bathrooms
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.bathrooms"/>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        Garden
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.garden"/>
+                                    </td>
+
+                                    <th>
+                                        Garden Area
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.garden_area"/>
+                                        m²
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ========================= -->
+                        <!-- Customer Information -->
+                        <!-- ========================= -->
+
+                        <h3 style="
+                            background:#222;
+                            color:white;
+                            padding:10px;
+                            margin-bottom:0;
+                        ">
+                            Customer Information
+                        </h3>
+
+                        <table class="table table-bordered"
+                               style="margin-bottom:25px;">
+
+                            <tbody>
+
+                                <tr>
+
+                                    <th style="width:30%;">
+                                        Customer
+                                    </th>
+
+                                    <td>
+
+                                        <span t-field="o.customer_id"/>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ========================= -->
+                        <!-- Installment Information -->
+                        <!-- ========================= -->
+
+                        <h3 style="
+                            background:#222;
+                            color:white;
+                            padding:10px;
+                            margin-bottom:0;
+                        ">
+                            Installment Information
+                        </h3>
+
+                        <table class="table table-bordered"
+                               style="margin-bottom:25px;">
+
+                            <tbody>
+
+                                <tr>
+
+                                    <th>
+                                        Down Payment
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.down_payment"/>
+                                    </td>
+
+                                    <th>
+                                        Interest Rate
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.interest_rate"/>
+                                        %
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        Installment Years
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.years"/>
+                                    </td>
+
+                                    <th>
+                                        Remaining Amount
+                                    </th>
+
+                                    <td>
+                                        <span t-field="o.remaining_amount"/>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ========================= -->
+                        <!-- Payment Summary -->
+                        <!-- ========================= -->
+
+                        <h3 style="
+                            background:#222;
+                            color:white;
+                            padding:10px;
+                            margin-bottom:0;
+                        ">
+                            Payment Summary
+                        </h3>
+
+                        <table class="table table-bordered"
+                               style="margin-bottom:30px;">
+
+                            <tbody>
+
+                                <tr>
+
+                                    <th>
+                                        Total After Interest
+                                    </th>
+
+                                    <td style="
+                                        font-weight:bold;
+                                        font-size:16px;
+                                    ">
+
+                                        <span t-field="o.total_after_interest"/>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        Monthly Installment
+                                    </th>
+
+                                    <td style="
+                                        font-weight:bold;
+                                        font-size:16px;
+                                    ">
+
+                                        <span t-field="o.monthly_installment"/>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ========================= -->
+                        <!-- Description -->
+                        <!-- ========================= -->
+
+                        <h3 style="
+                            background:#222;
+                            color:white;
+                            padding:10px;
+                            margin-bottom:10px;
+                        ">
+                            Description
+                        </h3>
+
+                        <div style="
+                            border:1px solid #ddd;
+                            padding:15px;
+                            min-height:70px;
+                            margin-bottom:30px;
+                        ">
+
+                            <span t-field="o.description"/>
+
+                        </div>
+
+
+                        <!-- ========================= -->
+                        <!-- Footer -->
+                        <!-- ========================= -->
+
+                        <div style="
+                            border-top:2px solid #222;
+                            padding-top:12px;
+                            text-align:center;
+                            margin-top:30px;
+                        ">
+
+                            <strong>
+                                ULTIMATE CODE
+                            </strong>
+
+                            <br/>
+
+                            <span style="font-style:italic;">
+                                Out of the Box
+                            </span>
+
+                            <br/>
+
+                            <small>
+                                Property Report
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </t>
+
+            </t>
+
+        </t>
+
+    </template>
+
+</odoo>

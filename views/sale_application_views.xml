@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- SALE APPLICATION FORM -->
+    <!-- ===================================================== -->
+
+    <record id="sale_application_form_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.sale.application.form</field>
+        <field name="model">estate.sale.application</field>
+
+        <field name="arch" type="xml">
+
+            <form string="Sale Application">
+
+                <!-- ========================= -->
+                <!-- HEADER -->
+                <!-- ========================= -->
+
+                <header>
+
+                    <button name="action_approve"
+                            string="Approve"
+                            type="object"
+                            class="btn-success"
+                            invisible="status != 'pending'"/>
+
+                    <button name="action_reject"
+                            string="Reject"
+                            type="object"
+                            class="btn-danger"
+                            invisible="status != 'pending'"/>
+
+                    <button name="action_open_sale_order"
+                            string="Sales Order"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="not sale_order_id"/>
+
+                    <button name="action_open_invoice"
+                            string="Invoice"
+                            type="object"
+                            class="btn-primary"
+                            invisible="not invoice_id"/>
+
+                    <button name="action_send_whatsapp"
+                            string="Send WhatsApp"
+                            type="object"
+                            class="btn-primary"/>
+
+                    <button name="action_print_report"
+                            string="Print Customer Report"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="status == 'pending'"/>
+
+                    <field name="status"
+                           widget="statusbar"
+                           statusbar_visible="pending,approved,rejected"/>
+
+                </header>
+
+
+                <sheet>
+
+                    <!-- ========================= -->
+                    <!-- CUSTOMER INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Customer Information">
+
+                        <group>
+
+                            <field name="customer_id"/>
+
+                            <field name="customer_name"
+                                   readonly="1"/>
+
+                            <field name="phone"
+                                   readonly="1"/>
+
+                            <field name="customer_email"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="address"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- PROPERTY INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Property Information">
+
+                        <group>
+
+                            <field name="property_id"/>
+
+                            <field name="product_id"
+                                   readonly="1"/>
+
+                            <field name="area"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="property_price"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- PAYMENT INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Payment Information">
+
+                        <group>
+
+                            <field name="payment_type"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- INSTALLMENT INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Installment Information"
+                           invisible="payment_type != 'installment'">
+
+                        <group>
+
+                            <field name="installment_years"/>
+
+                            <field name="annual_interest"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="total_installment_amount"
+                                   readonly="1"/>
+
+                            <field name="yearly_payment"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- SALES & INVOICE INFORMATION -->
+                    <!-- ========================= -->
+
+                    <group string="Sales &amp; Invoice Information"
+                           invisible="not sale_order_id">
+
+                        <group>
+
+                            <field name="sale_order_id"
+                                   readonly="1"/>
+
+                            <field name="sale_order_name"
+                                   readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="invoice_id"
+                                   readonly="1"/>
+
+                            <field name="invoice_name"
+                                   readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+
+                    <!-- ========================= -->
+                    <!-- NOTEBOOK -->
+                    <!-- ========================= -->
+
+                    <notebook>
+
+                        <!-- ========================= -->
+                        <!-- INSTALLMENTS -->
+                        <!-- ========================= -->
+
+                        <page string="Installments"
+                              invisible="payment_type != 'installment'">
+
+                            <!-- SUMMARY -->
+
+                            <group string="Installment Summary">
+
+                                <group>
+
+                                    <field name="installment_count"
+                                           readonly="1"/>
+
+                                    <field name="total_installment_amount"
+                                           readonly="1"/>
+
+                                </group>
+
+                                <group>
+
+                                    <field name="total_paid_amount"
+                                           readonly="1"/>
+
+                                    <field name="total_remaining_amount"
+                                           readonly="1"/>
+
+                                </group>
+
+                            </group>
+
+
+                            <!-- INSTALLMENT TABLE -->
+
+                            <field name="installment_ids"
+                                   nolabel="1"
+                                   readonly="status != 'approved'">
+
+                                <list string="Installment Schedule"
+                                      editable="bottom">
+
+                                    <field name="installment_number"
+                                           readonly="1"/>
+
+                                    <field name="name"
+                                           readonly="1"/>
+
+                                    <field name="amount"
+                                           readonly="1"/>
+
+                                    <field name="paid_amount"/>
+
+                                    <field name="remaining_amount"
+                                           readonly="1"/>
+
+                                    <field name="due_date"
+                                           readonly="1"/>
+
+                                    <field name="payment_date"
+                                           readonly="1"/>
+
+                                    <field name="status"
+                                           readonly="1"/>
+
+                                    <field name="invoice_name"
+                                           readonly="1"/>
+
+                                    <button name="action_register_payment"
+                                            string="Register Payment"
+                                            type="object"
+                                            class="btn-primary"
+                                            invisible="status == 'paid'"/>
+
+                                </list>
+
+                            </field>
+
+                        </page>
+
+
+                        <!-- ========================= -->
+                        <!-- NOTES -->
+                        <!-- ========================= -->
+
+                        <page string="Notes">
+
+                            <group>
+
+                                <field name="notes"
+                                       placeholder="Enter notes..."/>
+
+                            </group>
+
+                        </page>
+
+
+                        <!-- ========================= -->
+                        <!-- REJECTION -->
+                        <!-- ========================= -->
+
+                        <page string="Rejection">
+
+                            <group>
+
+                                <field name="reject_reason"
+                                       placeholder="Enter reject reason..."/>
+
+                            </group>
+
+                        </page>
+
+
+                        <!-- ========================= -->
+                        <!-- APPROVAL INFORMATION -->
+                        <!-- ========================= -->
+
+                        <page string="Approval Information">
+
+                            <group>
+
+                                <group>
+
+                                    <field name="approved_by"
+                                           readonly="1"/>
+
+                                    <field name="approved_date"
+                                           readonly="1"/>
+
+                                </group>
+
+                                <group>
+
+                                    <field name="whatsapp_sent"
+                                           readonly="1"/>
+
+                                </group>
+
+                            </group>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- SALE APPLICATION LIST -->
+    <!-- ===================================================== -->
+
+    <record id="sale_application_tree_view"
+            model="ir.ui.view">
+
+        <field name="name">estate.sale.application.list</field>
+
+        <field name="model">estate.sale.application</field>
+
+        <field name="arch" type="xml">
+
+            <list string="Sale Applications">
+
+                <field name="customer_name"/>
+
+                <field name="phone"/>
+
+                <field name="property_id"/>
+
+                <field name="product_id"/>
+
+                <field name="area"/>
+
+                <field name="property_price"/>
+
+                <field name="payment_type"/>
+
+                <field name="sale_order_name"/>
+
+                <field name="invoice_name"/>
+
+                <field name="status"/>
+
+                <field name="approved_by"/>
+
+                <field name="approved_date"/>
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- SALE APPLICATION ACTION -->
+    <!-- ===================================================== -->
+
+    <record id="sale_application_action"
+            model="ir.actions.act_window">
+
+        <field name="name">Sale Applications</field>
+
+        <field name="res_model">estate.sale.application</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- MENUS -->
+    <!-- ===================================================== -->
+
+    <menuitem id="sale_application_menu"
+              name="Sale Applications"
+              parent="estate_menu"
+              sequence="20"/>
+
+    <menuitem id="sale_application_submenu"
+              name="Applications"
+              parent="sale_application_menu"
+              action="sale_application_action"
+              sequence="10"/>
+
+</odoo>

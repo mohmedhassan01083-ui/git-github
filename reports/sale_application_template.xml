@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <template id="sale_application_template">
+
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs" t-as="o">
+
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <div class="text-center">
+
+                            <h1 style="margin-bottom: 5px;">
+                                Ultimate Code
+                            </h1>
+
+                            <h4>
+                                Out of the Box
+                            </h4>
+
+                            <hr/>
+
+                            <h2>
+                                Sale Application
+                            </h2>
+
+                        </div>
+
+
+                        <!-- Customer Information -->
+
+                        <h3>
+                            Customer Information
+                        </h3>
+
+                        <table class="table table-bordered">
+
+                            <tr>
+                                <th>Customer Name</th>
+                                <td>
+                                    <span t-field="o.customer_name"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Phone</th>
+                                <td>
+                                    <span t-field="o.phone"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Email</th>
+                                <td>
+                                    <span t-field="o.customer_email"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Address</th>
+                                <td>
+                                    <span t-field="o.address"/>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <!-- Property Information -->
+
+                        <h3>
+                            Property Information
+                        </h3>
+
+                        <table class="table table-bordered">
+
+                            <tr>
+                                <th>Property</th>
+                                <td>
+                                    <span t-field="o.property_id"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Required Area</th>
+                                <td>
+                                    <span t-field="o.area"/>
+                                    m²
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>Property Price</th>
+                                <td>
+                                    <span t-field="o.property_price"/>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                        <!-- Payment Information -->
+
+                        <h3>
+                            Payment Information
+                        </h3>
+
+                        <table class="table table-bordered">
+
+                            <tr>
+                                <th>Payment Type</th>
+                                <td>
+                                    <span t-field="o.payment_type"/>
+                                </td>
+                            </tr>
+
+                            <t t-if="o.payment_type == 'installment'">
+
+                                <tr>
+                                    <th>Installment Years</th>
+                                    <td>
+                                        <span t-field="o.installment_years"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Annual Interest</th>
+                                    <td>
+                                        <span t-field="o.annual_interest"/>
+                                        %
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Total Installment Amount</th>
+                                    <td>
+                                        <span t-field="o.total_installment_amount"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Yearly Payment</th>
+                                    <td>
+                                        <span t-field="o.yearly_payment"/>
+                                    </td>
+                                </tr>
+
+                            </t>
+
+                        </table>
+
+
+                        <!-- Status -->
+
+                        <h3>
+                            Application Status
+                        </h3>
+
+                        <table class="table table-bordered">
+
+                            <tr>
+                                <th>Status</th>
+                                <td>
+                                    <span t-field="o.status"/>
+                                </td>
+                            </tr>
+
+                            <t t-if="o.status == 'rejected'">
+
+                                <tr>
+                                    <th>Reject Reason</th>
+                                    <td>
+                                        <span t-field="o.reject_reason"/>
+                                    </td>
+                                </tr>
+
+                            </t>
+
+                            <t t-if="o.status == 'approved'">
+
+                                <tr>
+                                    <th>Approved By</th>
+                                    <td>
+                                        <span t-field="o.approved_by"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Approved Date</th>
+                                    <td>
+                                        <span t-field="o.approved_date"/>
+                                    </td>
+                                </tr>
+
+                            </t>
+
+                        </table>
+
+
+                        <!-- Notes -->
+
+                        <t t-if="o.notes">
+
+                            <h3>
+                                Notes
+                            </h3>
+
+                            <div class="border p-3">
+                                <span t-field="o.notes"/>
+                            </div>
+
+                        </t>
+
+
+                        <br/>
+
+                        <div class="text-center">
+
+                            <strong>
+                                Ultimate Code
+                            </strong>
+
+                            <br/>
+
+                            <span>
+                                Out of the Box
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </t>
+
+            </t>
+
+        </t>
+
+    </template>
+
+</odoo>
